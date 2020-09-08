@@ -100,5 +100,14 @@ class CategoryTest : StringSpec(), TestListener {
             deleteCategory.name shouldBe "name"
             client.getCategories().size shouldBe 0
         }
+
+        "add child category (NOT_FOUND)" {
+            val category = CategoryCreate("name")
+
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/0/categories", category)) }
+
+            e.status shouldBe HttpStatus.NOT_FOUND
+            e.message shouldContain "Category Not Found"
+        }
     }
 }

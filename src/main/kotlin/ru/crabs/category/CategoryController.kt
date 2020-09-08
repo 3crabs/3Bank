@@ -27,6 +27,10 @@ open class CategoryController : CategoryOperations {
         return categoryService.deleteCategory(id)?.let { CategoryGetConverter.convert(it) }
     }
 
+    override fun addChildCategory(id: Long, category: CategoryCreate): CategoryGet? {
+        return null
+    }
+
     @Error(status = HttpStatus.NOT_FOUND)
     fun notFound(request: HttpRequest<*>): HttpResponse<JsonError> {
         val error = JsonError("Category Not Found").link(Link.SELF, Link.of(request.uri))

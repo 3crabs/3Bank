@@ -17,4 +17,7 @@ interface CategoryOperations {
 
     @Delete("/{id}")
     fun deleteCategory(id: Long): CategoryGet?
+
+    @Post("/{id}/categories")
+    fun addChildCategory(id: Long, category: CategoryCreate): CategoryGet?
 }
