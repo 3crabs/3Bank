@@ -9,5 +9,7 @@ data class CategoryGet(
         var id: Long,
 
         @field:NotBlank
-        var name: String
+        var name: String,
+
+        var categories: List<CategoryGet>?
 )

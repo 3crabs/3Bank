@@ -15,20 +15,23 @@ open class CategoryController : CategoryOperations {
     @Inject
     lateinit var categoryService: CategoryService
 
+    @Inject
+    lateinit var categoryGetConverter: CategoryGetConverter
+
     override fun addCategory(category: CategoryCreate): CategoryGet {
-        return CategoryGetConverter.convert(categoryService.addCategory(CategoryCreateConverter.convert(category)))
+        return categoryGetConverter.convert(categoryService.addCategory(CategoryCreateConverter.convert(category)))
     }
 
     override fun getCategories(): List<CategoryGet> {
-        return categoryService.getCategories().map { CategoryGetConverter.convert(it) }
+        return categoryService.getCategories().map { categoryGetConverter.convert(it) }
     }
 
     override fun deleteCategory(id: Long): CategoryGet? {
-        return categoryService.deleteCategory(id)?.let { CategoryGetConverter.convert(it) }
+        return categoryService.deleteCategory(id)?.let { categoryGetConverter.convert(it) }
     }
 
     override fun addChildCategory(id: Long, category: CategoryCreate): CategoryGet? {
-        return null
+        return categoryGetConverter.convert(categoryService.addCategory(CategoryCreateConverter.convert(id, category)))
     }
 
     @Error(status = HttpStatus.NOT_FOUND)

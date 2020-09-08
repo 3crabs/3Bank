@@ -14,7 +14,7 @@ class CategorySingleton : CategoryService {
     }
 
     override fun getCategories(): List<CategoryEntity> {
-        return categoryRepository.findAll().toList()
+        return categoryRepository.findAllByCategoryIdIsNull()
     }
 
     override fun deleteCategory(id: Long): CategoryEntity? {

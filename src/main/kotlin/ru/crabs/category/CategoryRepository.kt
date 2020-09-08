@@ -8,4 +8,8 @@ import io.micronaut.data.repository.CrudRepository
 interface CategoryRepository : CrudRepository<CategoryEntity, Long> {
 
     fun findOneById(id: Long): CategoryEntity?
+
+    fun findAllByCategoryId(categoryId: Long): List<CategoryEntity>
+
+    fun findAllByCategoryIdIsNull(): List<CategoryEntity>
 }
