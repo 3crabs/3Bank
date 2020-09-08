@@ -1,6 +1,7 @@
 micronaut:
   application:
     name: free_bank
+
   router:
     static-resources:
       swagger:
@@ -33,5 +34,10 @@ jpa:
         bytecode:
           provider: none
         hbm2ddl:
-          auto: update
+          auto: none
         show_sql: true
+
+flyway:
+  datasources:
+    default:
+      enabled: true

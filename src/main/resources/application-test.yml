@@ -6,14 +6,3 @@ datasources:
   default:
     url: jdbc:tc:postgresql:12:///postgres
     driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
-
-jpa:
-  default:
-    entity-scan:
-      packages: 'ru.crabs.category'
-    properties:
-      hibernate:
-        bytecode:
-          provider: none
-        hbm2ddl:
-          auto: update

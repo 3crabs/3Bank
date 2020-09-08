@@ -53,6 +53,9 @@ dependencies {
     // open-api
     kapt("io.micronaut.configuration:micronaut-openapi")
     implementation("io.swagger.core.v3:swagger-annotations")
+
+    // flyway
+    implementation("io.micronaut.flyway:micronaut-flyway")
 }
 
 test.classpath += configurations.developmentOnly

@@ -101,7 +101,7 @@ class CategoryTest : StringSpec(), TestListener {
             client.getCategories().size shouldBe 0
         }
 
-        "add child category" {
+        "test add child category" {
             val category = CategoryCreate("name 1")
             val newCategory = client.addCategory(category)
             val childCategory = CategoryCreate("name 2")
@@ -115,6 +115,17 @@ class CategoryTest : StringSpec(), TestListener {
             categories.size shouldBe 1
             categories[0].name shouldBe "name 1"
             categories[0].categories?.get(0)!!.name shouldBe "name 2"
+        }
+
+        "test delete category with children" {
+            val category = CategoryCreate("name 1")
+            val newCategory = client.addCategory(category)
+            val childCategory = CategoryCreate("name 2")
+            client.addChildCategory(newCategory.id, childCategory)
+
+            client.deleteCategory(newCategory.id)
+
+            categoryRepository.findAll().toList().size shouldBe 0
         }
     }
 }
