@@ -16,4 +16,10 @@ class CategorySingleton : CategoryService {
     override fun getCategories(): List<CategoryEntity> {
         return categoryRepository.findAll().toList()
     }
+
+    override fun deleteCategory(id: Long): CategoryEntity? {
+        val c = categoryRepository.findOneById(id)
+        c?.id?.let { categoryRepository.deleteById(it) }
+        return c
+    }
 }

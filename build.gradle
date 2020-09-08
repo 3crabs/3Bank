@@ -57,7 +57,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "ru.crabs.ApplicationKt"
+mainClassName = "ru.crabs.Application"
 
 // use JUnit 5 platform
 test {

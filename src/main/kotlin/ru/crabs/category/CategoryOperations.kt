@@ -1,10 +1,7 @@
 package ru.crabs.category
 
 import io.micronaut.http.HttpStatus
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
-import io.micronaut.http.annotation.Status
+import io.micronaut.http.annotation.*
 import javax.validation.Valid
 
 interface CategoryOperations {
@@ -15,4 +12,7 @@ interface CategoryOperations {
 
     @Get
     fun getCategories(): List<CategoryGet>
+
+    @Delete("/{id}")
+    fun deleteCategory(id: Long): CategoryGet?
 }

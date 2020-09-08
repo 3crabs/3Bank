@@ -78,5 +78,27 @@ class CategoryTest : StringSpec(), TestListener {
 
             categories.size shouldBe 1
         }
+
+        "test delete category (NOT_FOUND)" {
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.DELETE("/0", "")) }
+
+            e.status shouldBe HttpStatus.NOT_FOUND
+            e.message shouldContain "Category Not Found"
+        }
+
+        "test delete category" {
+            client.getCategories().size shouldBe 0
+
+            val category = CategoryCreate("name")
+            val newCategory = client.addCategory(category)
+
+            client.getCategories().size shouldBe 1
+
+            val deleteCategory = client.deleteCategory(newCategory.id)
+
+            deleteCategory.shouldNotBeNull()
+            deleteCategory.name shouldBe "name"
+            client.getCategories().size shouldBe 0
+        }
     }
 }
