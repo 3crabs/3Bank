@@ -4,16 +4,30 @@ import io.kotlintest.extensions.TestListener
 import io.kotlintest.matchers.types.shouldNotBeNull
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
+import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.client.HttpClient
+import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.IncomeClient
 import ru.crabs.income.IncomeCreate
+import ru.crabs.income.IncomeGet
+import ru.crabs.income.IncomeRepository
 import javax.inject.Inject
 
 @MicronautTest
 class IncomeTest : StringSpec(), TestListener {
 
     @Inject
+    @field:Client("/incomes")
+    lateinit var httpClient: HttpClient
+
+    @Inject
     lateinit var client: IncomeClient
+
+    @Inject
+    lateinit var incomeRepository: IncomeRepository
 
     init {
         "test add income" {
@@ -24,6 +38,24 @@ class IncomeTest : StringSpec(), TestListener {
             newIncome.shouldNotBeNull()
             newIncome.id.shouldNotBeNull()
             newIncome.amount shouldBe 100
+        }
+
+        "test add income (CREATED)" {
+            val income = IncomeCreate(100)
+
+            val r: HttpResponse<IncomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
+
+            r.status shouldBe HttpStatus.CREATED
+        }
+
+        "test add income (check base)" {
+            val income = IncomeCreate(100)
+
+            val newIncome = client.addIncome(income)
+
+            val i = incomeRepository.findOneById(newIncome.id)
+            i.shouldNotBeNull()
+            i.amount shouldBe 100
         }
     }
 }

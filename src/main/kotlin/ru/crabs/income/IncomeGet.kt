@@ -2,7 +2,7 @@ package ru.crabs.income
 
 data class IncomeGet(
 
-        var id: Long?,
+        var id: Long,
 
         val amount: Long
 )

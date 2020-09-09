@@ -1,13 +1,21 @@
 package ru.crabs.income
 
 import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Post
+import javax.inject.Inject
 
 @Controller("/incomes")
-class IncomeController {
+open class IncomeController : IncomeOperations {
 
-    @Post
-    fun addIncome(): IncomeGet? {
-        return IncomeGet(1, 100)
+    @Inject
+    lateinit var incomeService: IncomeService
+
+    @Inject
+    lateinit var incomeCreateConverter: IncomeCreateConverter
+
+    @Inject
+    lateinit var incomeGetConverter: IncomeGetConverter
+
+    override fun addIncome(income: IncomeCreate): IncomeGet {
+        return incomeGetConverter.convert(incomeService.addIncome(incomeCreateConverter.convert(income)))
     }
 }

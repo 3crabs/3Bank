@@ -7,5 +7,5 @@ import javax.validation.constraints.Positive
 data class IncomeCreate(
 
         @Positive
-        var amount: Long
+        val amount: Long
 )

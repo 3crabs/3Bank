@@ -7,5 +7,5 @@ import javax.validation.constraints.NotBlank
 data class CategoryCreate(
 
         @field:NotBlank(message = "name must not be blank")
-        var name: String?
+        val name: String?
 )
