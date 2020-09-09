@@ -1,4 +1,4 @@
-package ru.crabs
+package ru.crabs.base
 
 interface Converter<S, T> {
 

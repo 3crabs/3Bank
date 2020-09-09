@@ -1,6 +1,6 @@
 package ru.crabs.category
 
-import ru.crabs.Converter
+import ru.crabs.base.Converter
 import javax.inject.Inject
 import javax.inject.Singleton
 

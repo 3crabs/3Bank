@@ -14,7 +14,7 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
-import ru.crabs.category.CategoryClient
+import ru.crabs.clients.CategoryClient
 import ru.crabs.category.CategoryCreate
 import ru.crabs.category.CategoryGet
 import ru.crabs.category.CategoryRepository

@@ -3,7 +3,7 @@ package ru.crabs
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import io.micronaut.test.annotation.MicronautTest
-import ru.crabs.index.IndexClient
+import ru.crabs.clients.IndexClient
 import javax.inject.Inject
 
 @MicronautTest
