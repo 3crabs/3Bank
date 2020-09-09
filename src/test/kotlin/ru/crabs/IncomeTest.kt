@@ -51,6 +51,15 @@ class IncomeTest : StringSpec(), TestListener {
             r.status shouldBe HttpStatus.CREATED
         }
 
+        "test add income (BAD_REQUEST)" {
+            val income = IncomeCreate(-100)
+
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
+
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldContain "amount must be positive"
+        }
+
         "test add income (check base)" {
             val income = IncomeCreate(100)
 
@@ -59,15 +68,6 @@ class IncomeTest : StringSpec(), TestListener {
             val i = incomeRepository.findOneById(newIncome.id)
             i.shouldNotBeNull()
             i.amount shouldBe 100
-        }
-
-        "test add income (BAD_REQUEST)" {
-            val income = IncomeCreate(-100)
-
-            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
-
-            e.status shouldBe HttpStatus.BAD_REQUEST
-            e.message shouldContain "amount must be positive"
         }
     }
 }

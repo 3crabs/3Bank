@@ -43,6 +43,7 @@ class CategoryTest : StringSpec(), TestListener {
 
             val newCategory = client.addCategory(category)
 
+            newCategory.shouldNotBeNull()
             newCategory.id.shouldNotBeNull()
             newCategory.name shouldBe "name"
         }
