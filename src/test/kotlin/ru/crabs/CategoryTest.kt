@@ -138,14 +138,11 @@ class CategoryTest : StringSpec(), TestListener {
             updateCategory.name shouldBe "name 2"
         }
 
-//        "test update category" {
-//            client.addCategory(CategoryCreate("name 1"))
-//            client.getCategories()[0].name shouldBe "name 1"
-//
-//            client.updateCategory(CategoryCreate("name 2"))
-//            client.getCategories()[0].name shouldBe "name 2"
-//        }
+        "test update category (NOT_FOUND)" {
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.PUT("/0", CategoryCreate("name"))) }
 
-//        not found
+            e.status shouldBe HttpStatus.NOT_FOUND
+            e.message shouldContain "Category Not Found"
+        }
     }
 }
