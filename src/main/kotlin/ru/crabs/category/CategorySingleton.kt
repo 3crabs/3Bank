@@ -22,4 +22,11 @@ class CategorySingleton : CategoryService {
         c?.id?.let { categoryRepository.deleteById(it) }
         return c
     }
+
+    override fun updateCategory(id: Long, categoryEntity: CategoryEntity): CategoryEntity? {
+        val c = categoryRepository.findOneById(id)
+        c?.name = categoryEntity.name
+        c?.id?.let { categoryRepository.deleteById(it) }
+        return c
+    }
 }

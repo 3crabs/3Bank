@@ -22,7 +22,7 @@ open class CategoryController : CategoryOperations {
     lateinit var categoryCreateConverter: CategoryCreateConverter
 
     override fun addCategory(category: CategoryCreate): CategoryGet {
-        return categoryGetConverter.convert(categoryService.addCategory(categoryCreateConverter.convert(category)))
+        return categoryGetConverter.convert(categoryService.addCategory(categoryCreateConverter.convert(null, category)))
     }
 
     override fun getCategories(): List<CategoryGet> {
@@ -35,6 +35,10 @@ open class CategoryController : CategoryOperations {
 
     override fun addChildCategory(id: Long, category: CategoryCreate): CategoryGet? {
         return categoryGetConverter.convert(categoryService.addCategory(categoryCreateConverter.convert(id, category)))
+    }
+
+    override fun updateCategory(id: Long, category: CategoryCreate): CategoryGet? {
+        return categoryService.updateCategory(id, categoryCreateConverter.convert(id, category))?.let { categoryGetConverter.convert(it) }
     }
 
     @Error(status = HttpStatus.NOT_FOUND)

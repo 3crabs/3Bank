@@ -14,10 +14,10 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
-import ru.crabs.clients.CategoryClient
 import ru.crabs.category.CategoryCreate
 import ru.crabs.category.CategoryGet
 import ru.crabs.category.CategoryRepository
+import ru.crabs.clients.CategoryClient
 import javax.inject.Inject
 
 @MicronautTest
@@ -127,5 +127,25 @@ class CategoryTest : StringSpec(), TestListener {
 
             categoryRepository.findAll().toList().size shouldBe 0
         }
+
+        "test update category" {
+            val newCategory = client.addCategory(CategoryCreate("name 1"))
+            client.getCategories()[0].name shouldBe "name 1"
+
+            val updateCategory = client.updateCategory(newCategory.id, CategoryCreate("name 2"))
+            updateCategory.shouldNotBeNull()
+            updateCategory.id shouldBe newCategory.id
+            updateCategory.name shouldBe "name 2"
+        }
+
+//        "test update category" {
+//            client.addCategory(CategoryCreate("name 1"))
+//            client.getCategories()[0].name shouldBe "name 1"
+//
+//            client.updateCategory(CategoryCreate("name 2"))
+//            client.getCategories()[0].name shouldBe "name 2"
+//        }
+
+//        not found
     }
 }

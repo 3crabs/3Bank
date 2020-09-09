@@ -25,4 +25,8 @@ interface CategoryOperations {
     @Post("/{id}/categories")
     @Operation(summary = "Создание подкатегории")
     fun addChildCategory(id: Long, category: CategoryCreate): CategoryGet?
+
+    @Put("/{id}")
+    @Operation(summary = "Редактирование категории/подкатегории")
+    fun updateCategory(id: Long, category: CategoryCreate): CategoryGet?
 }
