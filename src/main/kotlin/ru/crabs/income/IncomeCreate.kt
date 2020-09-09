@@ -6,6 +6,6 @@ import javax.validation.constraints.Positive
 @Introspected
 data class IncomeCreate(
 
-        @Positive
+        @field:Positive(message = "amount must be positive")
         val amount: Long
 )
