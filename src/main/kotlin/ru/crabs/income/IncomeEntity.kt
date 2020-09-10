@@ -1,5 +1,6 @@
 package ru.crabs.income
 
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -10,7 +11,9 @@ data class IncomeEntity(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long,
 
-        var amount: Long
+        var amount: Long,
+
+        var created: Date
 ) {
-    constructor() : this(0, 0)
+    constructor() : this(0, 0, Date())
 }

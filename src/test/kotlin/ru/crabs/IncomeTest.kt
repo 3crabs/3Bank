@@ -17,6 +17,8 @@ import ru.crabs.clients.IncomeClient
 import ru.crabs.income.IncomeCreate
 import ru.crabs.income.IncomeGet
 import ru.crabs.income.IncomeRepository
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @MicronautTest
@@ -34,7 +36,7 @@ class IncomeTest : StringSpec(), TestListener {
 
     init {
         "test add income" {
-            val income = IncomeCreate(100)
+            val income = IncomeCreate(100, Date())
 
             val newIncome = client.addIncome(income)
 
@@ -44,7 +46,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (CREATED)" {
-            val income = IncomeCreate(100)
+            val income = IncomeCreate(100, Date())
 
             val r: HttpResponse<IncomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
 
@@ -52,7 +54,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (BAD_REQUEST)" {
-            val income = IncomeCreate(-100)
+            val income = IncomeCreate(-100, Date())
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
 
@@ -61,13 +63,15 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (check base)" {
-            val income = IncomeCreate(100)
+            val income = IncomeCreate(100, Date())
 
             val newIncome = client.addIncome(income)
 
             val i = incomeRepository.findOneById(newIncome.id)
             i.shouldNotBeNull()
             i.amount shouldBe 100
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
         }
     }
 }
