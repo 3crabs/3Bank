@@ -12,5 +12,6 @@ data class IncomeCreate(
         @field:Positive(message = "amount must be positive")
         val amount: Long,
 
+        @field:NotNull
         val created: Date
 )
