@@ -9,5 +9,7 @@ data class IncomeGet(
         var id: Long,
 
         @field:NotNull
-        val amount: Long
+        val amount: Long,
+
+        var created: Date
 )

@@ -34,15 +34,29 @@ class IncomeTest : StringSpec(), TestListener {
     @Inject
     lateinit var incomeRepository: IncomeRepository
 
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
     init {
         "test add income" {
             val income = IncomeCreate(100, Date())
 
+            val i = client.addIncome(income)
+
+            i.shouldNotBeNull()
+            i.id.shouldNotBeNull()
+            i.amount shouldBe 100
+            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
+        }
+
+        "test add income (check base)" {
+            val income = IncomeCreate(100, Date())
+
             val newIncome = client.addIncome(income)
 
-            newIncome.shouldNotBeNull()
-            newIncome.id.shouldNotBeNull()
-            newIncome.amount shouldBe 100
+            val i = incomeRepository.findOneById(newIncome.id)
+            i.shouldNotBeNull()
+            i.amount shouldBe 100
+            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
         }
 
         "test add income (CREATED)" {
@@ -60,18 +74,6 @@ class IncomeTest : StringSpec(), TestListener {
 
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldContain "amount must be positive"
-        }
-
-        "test add income (check base)" {
-            val income = IncomeCreate(100, Date())
-
-            val newIncome = client.addIncome(income)
-
-            val i = incomeRepository.findOneById(newIncome.id)
-            i.shouldNotBeNull()
-            i.amount shouldBe 100
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
         }
     }
 }

@@ -7,6 +7,6 @@ import javax.inject.Singleton
 class IncomeGetConverter : Converter<IncomeEntity, IncomeGet> {
 
     override fun convert(o: IncomeEntity): IncomeGet {
-        return IncomeGet(o.id, o.amount)
+        return IncomeGet(o.id, o.amount, o.created)
     }
 }
