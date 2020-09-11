@@ -43,7 +43,7 @@ open class CategoryController : CategoryOperations {
 
     @Error(status = HttpStatus.NOT_FOUND)
     fun notFound(request: HttpRequest<*>): HttpResponse<JsonError> {
-        val error = JsonError("Category Not Found").link(Link.SELF, Link.of(request.uri))
+        val error = JsonError("category not found").link(Link.SELF, Link.of(request.uri))
         return HttpResponse.notFound<JsonError>().body(error)
     }
 }
