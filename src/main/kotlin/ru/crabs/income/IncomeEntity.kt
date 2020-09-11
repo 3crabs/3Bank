@@ -1,5 +1,6 @@
 package ru.crabs.income
 
+import ru.crabs.category.CategoryEntity
 import java.util.*
 import javax.persistence.*
 
@@ -13,7 +14,11 @@ data class IncomeEntity(
 
         var amount: Long,
 
-        var created: Date
+        var created: Date,
+
+        @ManyToOne
+        @JoinColumn(name = "category_id")
+        val category: CategoryEntity?
 ) {
-    constructor() : this(0, 0, Date())
+    constructor() : this(0, 0, Date(), null)
 }
