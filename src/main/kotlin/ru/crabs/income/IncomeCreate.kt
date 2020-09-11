@@ -13,5 +13,7 @@ data class IncomeCreate(
         val amount: Long,
 
         @field:NotNull
-        val created: Date
+        val created: Date,
+
+        val categoryId: Long? = null
 )
