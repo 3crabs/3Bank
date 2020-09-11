@@ -84,7 +84,7 @@ class CategoryTest : StringSpec(), TestListener {
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.DELETE("/0", "")) }
 
             e.status shouldBe HttpStatus.NOT_FOUND
-            e.message shouldContain "Category Not Found"
+            e.message shouldContain "category not found"
         }
 
         "test delete category" {
@@ -143,7 +143,7 @@ class CategoryTest : StringSpec(), TestListener {
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.PUT("/0", CategoryCreate("name"))) }
 
             e.status shouldBe HttpStatus.NOT_FOUND
-            e.message shouldContain "Category Not Found"
+            e.message shouldContain "category not found"
         }
     }
 }
