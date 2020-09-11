@@ -67,13 +67,22 @@ class IncomeTest : StringSpec(), TestListener {
             r.status shouldBe HttpStatus.CREATED
         }
 
-        "test add income (BAD_REQUEST)" {
+        "test add income (BAD_REQUEST) amount" {
             val income = IncomeCreate(-100, Date())
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
 
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldContain "amount must be positive"
+        }
+
+        "test add income (BAD_REQUEST) category" {
+            val income = IncomeCreate(100, Date(), 1)
+
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
+
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldContain "category not found"
         }
     }
 }
