@@ -1,9 +1,9 @@
-package ru.crabs.outcome
+package ru.crabs.flow
 
 import java.util.*
 import javax.validation.constraints.NotNull
 
-data class OutcomeGet(
+data class FlowGet(
 
         @field:NotNull
         var id: Long,

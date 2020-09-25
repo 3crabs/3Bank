@@ -15,7 +15,7 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.IncomeClient
 import ru.crabs.flow.FlowCreate
-import ru.crabs.income.IncomeGet
+import ru.crabs.flow.FlowGet
 import ru.crabs.income.IncomeRepository
 import java.text.SimpleDateFormat
 import java.util.*
@@ -62,7 +62,7 @@ class IncomeTest : StringSpec(), TestListener {
         "test add income (CREATED)" {
             val income = FlowCreate(100, Date())
 
-            val r: HttpResponse<IncomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
+            val r: HttpResponse<FlowGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
 
             r.status shouldBe HttpStatus.CREATED
         }

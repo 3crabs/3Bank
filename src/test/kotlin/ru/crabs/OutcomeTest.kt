@@ -15,7 +15,7 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.OutcomeClient
 import ru.crabs.flow.FlowCreate
-import ru.crabs.outcome.OutcomeGet
+import ru.crabs.flow.FlowGet
 import ru.crabs.outcome.OutcomeRepository
 import java.text.SimpleDateFormat
 import java.util.*
@@ -62,7 +62,7 @@ class OutcomeTest : StringSpec(), TestListener {
         "test add outcome (CREATED)" {
             val outcome = FlowCreate(100, Date())
 
-            val r: HttpResponse<OutcomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", outcome))
+            val r: HttpResponse<FlowGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", outcome))
 
             r.status shouldBe HttpStatus.CREATED
         }

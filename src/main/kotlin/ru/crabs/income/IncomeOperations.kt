@@ -7,6 +7,7 @@ import io.micronaut.http.annotation.Status
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import ru.crabs.flow.FlowCreate
+import ru.crabs.flow.FlowGet
 import javax.validation.Valid
 
 @Tag(name = "Доходы")
@@ -15,5 +16,5 @@ interface IncomeOperations {
     @Post
     @Status(HttpStatus.CREATED)
     @Operation(summary = "Добавление дохода")
-    fun addIncome(@Body @Valid flow: FlowCreate): IncomeGet
+    fun addIncome(@Body @Valid flow: FlowCreate): FlowGet
 }

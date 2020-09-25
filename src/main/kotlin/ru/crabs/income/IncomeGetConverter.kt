@@ -1,12 +1,13 @@
 package ru.crabs.income
 
 import ru.crabs.base.Converter
+import ru.crabs.flow.FlowGet
 import javax.inject.Singleton
 
 @Singleton
-class IncomeGetConverter : Converter<IncomeEntity, IncomeGet> {
+class IncomeGetConverter : Converter<IncomeEntity, FlowGet> {
 
-    override fun convert(o: IncomeEntity): IncomeGet {
-        return IncomeGet(o.id, o.amount, o.created)
+    override fun convert(o: IncomeEntity): FlowGet {
+        return FlowGet(o.id, o.amount, o.created)
     }
 }
