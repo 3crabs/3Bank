@@ -1,4 +1,4 @@
-package ru.crabs.outcome
+package ru.crabs.flow
 
 import io.micronaut.http.annotation.Controller
 import ru.crabs.flow.*
