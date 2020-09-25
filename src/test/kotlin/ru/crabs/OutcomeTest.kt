@@ -1,5 +1,7 @@
 package ru.crabs
 
+import io.kotlintest.TestCase
+import io.kotlintest.TestResult
 import io.kotlintest.extensions.TestListener
 import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.types.shouldNotBeNull
@@ -35,6 +37,14 @@ class OutcomeTest : StringSpec(), TestListener {
     lateinit var flowRepository: FlowRepository
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+
+    override fun beforeTest(testCase: TestCase) {
+        flowRepository.deleteAll()
+    }
+
+    override fun afterTest(testCase: TestCase, result: TestResult) {
+        flowRepository.deleteAll()
+    }
 
     init {
         "test add outcome" {

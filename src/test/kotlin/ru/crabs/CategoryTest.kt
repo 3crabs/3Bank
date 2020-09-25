@@ -1,6 +1,7 @@
 package ru.crabs
 
 import io.kotlintest.TestCase
+import io.kotlintest.TestResult
 import io.kotlintest.extensions.TestListener
 import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.types.shouldNotBeNull
@@ -34,6 +35,10 @@ class CategoryTest : StringSpec(), TestListener {
     lateinit var categoryRepository: CategoryRepository
 
     override fun beforeTest(testCase: TestCase) {
+        categoryRepository.deleteAll()
+    }
+
+    override fun afterTest(testCase: TestCase, result: TestResult) {
         categoryRepository.deleteAll()
     }
 
