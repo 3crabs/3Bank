@@ -1,12 +1,11 @@
 package ru.crabs.category
 
-import ru.crabs.base.Converter
 import javax.inject.Singleton
 
 @Singleton
-class CategoryCreateConverter : Converter<CategoryCreate, CategoryEntity> {
+class CategoryCreateConverter {
 
-    override fun convert(o: CategoryCreate): CategoryEntity {
+    fun convert(o: CategoryCreate): CategoryEntity {
         return convert(null, o)
     }
 

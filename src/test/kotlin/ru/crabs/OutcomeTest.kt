@@ -57,6 +57,7 @@ class OutcomeTest : StringSpec(), TestListener {
             i.shouldNotBeNull()
             i.amount shouldBe 100
             dateFormat.format(i.created) shouldBe dateFormat.format(Date())
+            i.type shouldBe "outcome"
         }
 
         "test add outcome (CREATED)" {

@@ -17,6 +17,6 @@ open class OutcomeController : FlowOperations {
     lateinit var flowGetConverter: FlowGetConverter
 
     override fun addFlow(flow: FlowCreate): FlowGet {
-        return flowGetConverter.convert(flowService.addFlow(flowCreateConverter.convert(flow)))
+        return flowGetConverter.convert(flowService.addFlow(flowCreateConverter.convert(flow, "outcome")))
     }
 }
