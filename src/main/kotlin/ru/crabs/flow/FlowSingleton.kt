@@ -1,17 +1,18 @@
-package ru.crabs.income
+package ru.crabs.flow
 
 import ru.crabs.flow.FlowEntity
 import ru.crabs.flow.FlowRepository
+import ru.crabs.flow.FlowService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class IncomeSingleton : IncomeService {
+class FlowSingleton : FlowService {
 
     @Inject
     lateinit var flowRepository: FlowRepository
 
-    override fun addIncome(flowEntity: FlowEntity): FlowEntity {
+    override fun addFlow(flowEntity: FlowEntity): FlowEntity {
         return flowRepository.save(flowEntity)
     }
 }

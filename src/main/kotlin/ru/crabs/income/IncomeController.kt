@@ -5,10 +5,10 @@ import ru.crabs.flow.*
 import javax.inject.Inject
 
 @Controller("/incomes")
-open class FlowController : FlowOperations {
+open class IncomeController : FlowOperations {
 
     @Inject
-    lateinit var incomeService: IncomeService
+    lateinit var flowService: FlowService
 
     @Inject
     lateinit var flowCreateConverter: FlowCreateConverter
@@ -17,6 +17,6 @@ open class FlowController : FlowOperations {
     lateinit var flowGetConverter: FlowGetConverter
 
     override fun addFlow(flow: FlowCreate): FlowGet {
-        return flowGetConverter.convert(incomeService.addIncome(flowCreateConverter.convert(flow)))
+        return flowGetConverter.convert(flowService.addFlow(flowCreateConverter.convert(flow)))
     }
 }

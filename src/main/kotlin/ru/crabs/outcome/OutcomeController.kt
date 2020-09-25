@@ -8,7 +8,7 @@ import javax.inject.Inject
 open class OutcomeController : FlowOperations {
 
     @Inject
-    lateinit var outcomeService: OutcomeService
+    lateinit var flowService: FlowService
 
     @Inject
     lateinit var flowCreateConverter: FlowCreateConverter
@@ -17,6 +17,6 @@ open class OutcomeController : FlowOperations {
     lateinit var flowGetConverter: FlowGetConverter
 
     override fun addFlow(flow: FlowCreate): FlowGet {
-        return flowGetConverter.convert(outcomeService.addOutcome(flowCreateConverter.convert(flow)))
+        return flowGetConverter.convert(flowService.addFlow(flowCreateConverter.convert(flow)))
     }
 }
