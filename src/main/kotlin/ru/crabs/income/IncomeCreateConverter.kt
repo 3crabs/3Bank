@@ -1,6 +1,7 @@
 package ru.crabs.income
 
 import ru.crabs.base.Converter
+import ru.crabs.category.CategoryNotFoundException
 import ru.crabs.category.CategoryRepository
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package ru.crabs.income
+package ru.crabs.category
 
 import io.micronaut.context.annotation.Requirements
 import io.micronaut.context.annotation.Requires
