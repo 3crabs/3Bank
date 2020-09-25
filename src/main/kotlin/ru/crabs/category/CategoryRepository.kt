@@ -12,4 +12,6 @@ interface CategoryRepository : CrudRepository<CategoryEntity, Long> {
     fun findAllByCategoryId(categoryId: Long): List<CategoryEntity>
 
     fun findAllByCategoryIdIsNull(): List<CategoryEntity>
+
+    fun existsByName(name: String): Boolean
 }

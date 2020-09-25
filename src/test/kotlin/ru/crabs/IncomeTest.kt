@@ -16,6 +16,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.category.CategoryCreate
+import ru.crabs.category.CategoryRepository
 import ru.crabs.clients.CategoryClient
 import ru.crabs.clients.IncomeClient
 import ru.crabs.flow.FlowCreate
@@ -41,14 +42,19 @@ class IncomeTest : StringSpec(), TestListener {
     @Inject
     lateinit var flowRepository: FlowRepository
 
+    @Inject
+    lateinit var categoryRepository: CategoryRepository
+
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     override fun beforeTest(testCase: TestCase) {
         flowRepository.deleteAll()
+        categoryRepository.deleteAll()
     }
 
     override fun afterTest(testCase: TestCase, result: TestResult) {
         flowRepository.deleteAll()
+        categoryRepository.deleteAll()
     }
 
     init {

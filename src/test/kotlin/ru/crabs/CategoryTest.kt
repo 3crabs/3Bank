@@ -150,5 +150,15 @@ class CategoryTest : StringSpec(), TestListener {
             e.status shouldBe HttpStatus.NOT_FOUND
             e.message shouldContain "category not found"
         }
+
+        "test add two categories with one name" {
+            val category = CategoryCreate("name")
+            client.addCategory(category)
+
+            val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", category)) }
+
+            e.status shouldBe HttpStatus.BAD_REQUEST
+            e.message shouldContain "category is already in use"
+        }
     }
 }

@@ -10,6 +10,9 @@ class CategorySingleton : CategoryService {
     lateinit var categoryRepository: CategoryRepository
 
     override fun addCategory(categoryEntity: CategoryEntity): CategoryEntity {
+        if (categoryRepository.existsByName(categoryEntity.name)) {
+            throw CategoryIsAlreadyInUseException()
+        }
         return categoryRepository.save(categoryEntity)
     }
 

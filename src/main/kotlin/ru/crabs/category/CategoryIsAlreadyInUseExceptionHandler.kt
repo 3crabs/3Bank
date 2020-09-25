@@ -12,10 +12,10 @@ import javax.inject.Singleton
 
 @Produces
 @Singleton
-@Requirements(Requires(classes = [CategoryNotFoundException::class]))
-class CategoryNotFoundExceptionHandler : ExceptionHandler<CategoryNotFoundException, HttpResponse<*>> {
+@Requirements(Requires(classes = [CategoryIsAlreadyInUseException::class]))
+class CategoryIsAlreadyInUseExceptionHandler : ExceptionHandler<CategoryIsAlreadyInUseException, HttpResponse<*>> {
 
-    override fun handle(request: HttpRequest<*>, e: CategoryNotFoundException): HttpResponse<JsonError> {
+    override fun handle(request: HttpRequest<*>, e: CategoryIsAlreadyInUseException): HttpResponse<JsonError> {
         val error = JsonError(e.message).link(Link.SELF, Link.of(request.uri))
         return HttpResponse.badRequest(error)
     }
