@@ -15,6 +15,8 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
+import ru.crabs.category.CategoryCreate
+import ru.crabs.clients.CategoryClient
 import ru.crabs.clients.FlowClient
 import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
@@ -32,6 +34,9 @@ class IncomeTest : StringSpec(), TestListener {
 
     @Inject
     lateinit var client: FlowClient
+
+    @Inject
+    lateinit var categoryClient: CategoryClient
 
     @Inject
     lateinit var flowRepository: FlowRepository
@@ -94,6 +99,15 @@ class IncomeTest : StringSpec(), TestListener {
 
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldContain "category not found"
+        }
+
+        "test add income with category" {
+            val category = categoryClient.addCategory(CategoryCreate("name"))
+            val income = FlowCreate(100, Date(), category.id)
+
+            val r: HttpResponse<FlowGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
+
+            r.status shouldBe HttpStatus.CREATED
         }
     }
 }
