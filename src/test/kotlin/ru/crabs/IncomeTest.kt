@@ -17,7 +17,7 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.category.CategoryCreate
 import ru.crabs.clients.CategoryClient
-import ru.crabs.clients.FlowClient
+import ru.crabs.clients.IncomeClient
 import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
 import ru.crabs.flow.FlowRepository
@@ -33,7 +33,7 @@ class IncomeTest : StringSpec(), TestListener {
     lateinit var httpClient: HttpClient
 
     @Inject
-    lateinit var client: FlowClient
+    lateinit var client: IncomeClient
 
     @Inject
     lateinit var categoryClient: CategoryClient

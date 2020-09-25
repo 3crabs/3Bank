@@ -15,6 +15,8 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
+import ru.crabs.category.CategoryCreate
+import ru.crabs.clients.CategoryClient
 import ru.crabs.clients.OutcomeClient
 import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
@@ -32,6 +34,9 @@ class OutcomeTest : StringSpec(), TestListener {
 
     @Inject
     lateinit var client: OutcomeClient
+
+    @Inject
+    lateinit var categoryClient: CategoryClient
 
     @Inject
     lateinit var flowRepository: FlowRepository
@@ -94,6 +99,20 @@ class OutcomeTest : StringSpec(), TestListener {
 
             e.status shouldBe HttpStatus.BAD_REQUEST
             e.message shouldContain "category not found"
+        }
+
+        "test add outcome with category check base" {
+            val category = categoryClient.addCategory(CategoryCreate("name"))
+            val income = FlowCreate(100, Date(), category.id)
+
+            val newIncome = client.addFlow(income)
+
+            val i = flowRepository.findOneById(newIncome.id)
+            i.shouldNotBeNull()
+            i.amount shouldBe 100
+            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
+            i.type shouldBe "outcome"
+            i.categoryId shouldBe category.id
         }
     }
 }
