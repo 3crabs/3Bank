@@ -13,7 +13,7 @@ import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
-import ru.crabs.clients.IncomeClient
+import ru.crabs.clients.FlowClient
 import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
 import ru.crabs.income.IncomeRepository
@@ -29,7 +29,7 @@ class IncomeTest : StringSpec(), TestListener {
     lateinit var httpClient: HttpClient
 
     @Inject
-    lateinit var client: IncomeClient
+    lateinit var client: FlowClient
 
     @Inject
     lateinit var incomeRepository: IncomeRepository
@@ -40,7 +40,7 @@ class IncomeTest : StringSpec(), TestListener {
         "test add income" {
             val income = FlowCreate(100, Date())
 
-            val i = client.addIncome(income)
+            val i = client.addFlow(income)
 
             i.shouldNotBeNull()
             i.id.shouldNotBeNull()
@@ -51,7 +51,7 @@ class IncomeTest : StringSpec(), TestListener {
         "test add income (check base)" {
             val income = FlowCreate(100, Date())
 
-            val newIncome = client.addIncome(income)
+            val newIncome = client.addFlow(income)
 
             val i = incomeRepository.findOneById(newIncome.id)
             i.shouldNotBeNull()

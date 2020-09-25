@@ -1,4 +1,4 @@
-package ru.crabs.income
+package ru.crabs.flow
 
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Body
@@ -11,10 +11,10 @@ import ru.crabs.flow.FlowGet
 import javax.validation.Valid
 
 @Tag(name = "Доходы")
-interface IncomeOperations {
+interface FlowOperations {
 
     @Post
     @Status(HttpStatus.CREATED)
     @Operation(summary = "Добавление дохода")
-    fun addIncome(@Body @Valid flow: FlowCreate): FlowGet
+    fun addFlow(@Body @Valid flow: FlowCreate): FlowGet
 }

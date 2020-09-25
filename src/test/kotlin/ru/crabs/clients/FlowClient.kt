@@ -1,7 +1,7 @@
 package ru.crabs.clients
 
 import io.micronaut.http.client.annotation.Client
-import ru.crabs.income.IncomeOperations
+import ru.crabs.flow.FlowOperations
 
 @Client("/incomes")
-interface IncomeClient : IncomeOperations
+interface FlowClient : FlowOperations

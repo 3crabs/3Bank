@@ -40,7 +40,7 @@ class OutcomeTest : StringSpec(), TestListener {
         "test add outcome" {
             val outcome = FlowCreate(100, Date())
 
-            val i = client.addOutcome(outcome)
+            val i = client.addFlow(outcome)
 
             i.shouldNotBeNull()
             i.id.shouldNotBeNull()
@@ -51,7 +51,7 @@ class OutcomeTest : StringSpec(), TestListener {
         "test add outcome (check base)" {
             val outcome = FlowCreate(100, Date())
 
-            val newOutcome = client.addOutcome(outcome)
+            val newOutcome = client.addFlow(outcome)
 
             val i = outcomeRepository.findOneById(newOutcome.id)
             i.shouldNotBeNull()
