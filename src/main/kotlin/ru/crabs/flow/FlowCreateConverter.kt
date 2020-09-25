@@ -1,14 +1,14 @@
-package ru.crabs.income
+package ru.crabs.flow
 
 import ru.crabs.base.Converter
 import ru.crabs.category.CategoryNotFoundException
 import ru.crabs.category.CategoryRepository
-import ru.crabs.flow.FlowCreate
+import ru.crabs.income.IncomeEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class IncomeCreateConverter : Converter<FlowCreate, IncomeEntity> {
+class FlowCreateConverter : Converter<FlowCreate, IncomeEntity> {
 
     @Inject
     lateinit var categoryRepository: CategoryRepository
