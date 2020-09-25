@@ -14,7 +14,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.IncomeClient
-import ru.crabs.income.IncomeCreate
+import ru.crabs.flow.FlowCreate
 import ru.crabs.income.IncomeGet
 import ru.crabs.income.IncomeRepository
 import java.text.SimpleDateFormat
@@ -38,7 +38,7 @@ class IncomeTest : StringSpec(), TestListener {
 
     init {
         "test add income" {
-            val income = IncomeCreate(100, Date())
+            val income = FlowCreate(100, Date())
 
             val i = client.addIncome(income)
 
@@ -49,7 +49,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (check base)" {
-            val income = IncomeCreate(100, Date())
+            val income = FlowCreate(100, Date())
 
             val newIncome = client.addIncome(income)
 
@@ -60,7 +60,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (CREATED)" {
-            val income = IncomeCreate(100, Date())
+            val income = FlowCreate(100, Date())
 
             val r: HttpResponse<IncomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", income))
 
@@ -68,7 +68,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (BAD_REQUEST) amount" {
-            val income = IncomeCreate(-100, Date())
+            val income = FlowCreate(-100, Date())
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
 
@@ -77,7 +77,7 @@ class IncomeTest : StringSpec(), TestListener {
         }
 
         "test add income (BAD_REQUEST) category" {
-            val income = IncomeCreate(100, Date(), 1)
+            val income = FlowCreate(100, Date(), 1)
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", income)) }
 

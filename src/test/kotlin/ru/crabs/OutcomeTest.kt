@@ -14,7 +14,7 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.OutcomeClient
-import ru.crabs.outcome.OutcomeCreate
+import ru.crabs.flow.FlowCreate
 import ru.crabs.outcome.OutcomeGet
 import ru.crabs.outcome.OutcomeRepository
 import java.text.SimpleDateFormat
@@ -38,7 +38,7 @@ class OutcomeTest : StringSpec(), TestListener {
 
     init {
         "test add outcome" {
-            val outcome = OutcomeCreate(100, Date())
+            val outcome = FlowCreate(100, Date())
 
             val i = client.addOutcome(outcome)
 
@@ -49,7 +49,7 @@ class OutcomeTest : StringSpec(), TestListener {
         }
 
         "test add outcome (check base)" {
-            val outcome = OutcomeCreate(100, Date())
+            val outcome = FlowCreate(100, Date())
 
             val newOutcome = client.addOutcome(outcome)
 
@@ -60,7 +60,7 @@ class OutcomeTest : StringSpec(), TestListener {
         }
 
         "test add outcome (CREATED)" {
-            val outcome = OutcomeCreate(100, Date())
+            val outcome = FlowCreate(100, Date())
 
             val r: HttpResponse<OutcomeGet> = httpClient.toBlocking().exchange(HttpRequest.POST("/", outcome))
 
@@ -68,7 +68,7 @@ class OutcomeTest : StringSpec(), TestListener {
         }
 
         "test add outcome (BAD_REQUEST) amount" {
-            val outcome = OutcomeCreate(-100, Date())
+            val outcome = FlowCreate(-100, Date())
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", outcome)) }
 
@@ -77,7 +77,7 @@ class OutcomeTest : StringSpec(), TestListener {
         }
 
         "test add outcome (BAD_REQUEST) category" {
-            val outcome = OutcomeCreate(100, Date(), 1)
+            val outcome = FlowCreate(100, Date(), 1)
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", outcome)) }
 
