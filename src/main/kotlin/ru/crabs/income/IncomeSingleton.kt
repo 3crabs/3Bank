@@ -1,5 +1,7 @@
 package ru.crabs.income
 
+import ru.crabs.flow.FlowEntity
+import ru.crabs.flow.FlowRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -7,9 +9,9 @@ import javax.inject.Singleton
 class IncomeSingleton : IncomeService {
 
     @Inject
-    lateinit var incomeRepository: IncomeRepository
+    lateinit var flowRepository: FlowRepository
 
-    override fun addIncome(incomeEntity: IncomeEntity): IncomeEntity {
-        return incomeRepository.save(incomeEntity)
+    override fun addIncome(flowEntity: FlowEntity): FlowEntity {
+        return flowRepository.save(flowEntity)
     }
 }

@@ -1,6 +1,8 @@
 package ru.crabs.outcome
 
+import ru.crabs.flow.FlowEntity
+
 interface OutcomeService {
 
-    fun addOutcome(outcomeEntity: OutcomeEntity): OutcomeEntity
+    fun addOutcome(flowEntity: FlowEntity): FlowEntity
 }

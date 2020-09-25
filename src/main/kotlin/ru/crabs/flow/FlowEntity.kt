@@ -1,12 +1,12 @@
-package ru.crabs.income
+package ru.crabs.flow
 
 import ru.crabs.category.CategoryEntity
 import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "incomes")
-data class IncomeEntity(
+@Table(name = "flows")
+data class FlowEntity(
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

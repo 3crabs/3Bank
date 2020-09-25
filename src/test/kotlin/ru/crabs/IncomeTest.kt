@@ -16,7 +16,7 @@ import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.clients.FlowClient
 import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
-import ru.crabs.income.IncomeRepository
+import ru.crabs.flow.FlowRepository
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -32,7 +32,7 @@ class IncomeTest : StringSpec(), TestListener {
     lateinit var client: FlowClient
 
     @Inject
-    lateinit var incomeRepository: IncomeRepository
+    lateinit var flowRepository: FlowRepository
 
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
@@ -53,7 +53,7 @@ class IncomeTest : StringSpec(), TestListener {
 
             val newIncome = client.addFlow(income)
 
-            val i = incomeRepository.findOneById(newIncome.id)
+            val i = flowRepository.findOneById(newIncome.id)
             i.shouldNotBeNull()
             i.amount shouldBe 100
             dateFormat.format(i.created) shouldBe dateFormat.format(Date())

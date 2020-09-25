@@ -1,10 +1,7 @@
 package ru.crabs.income
 
 import io.micronaut.http.annotation.Controller
-import ru.crabs.flow.FlowCreate
-import ru.crabs.flow.FlowCreateConverter
-import ru.crabs.flow.FlowGet
-import ru.crabs.flow.FlowOperations
+import ru.crabs.flow.*
 import javax.inject.Inject
 
 @Controller("/incomes")
@@ -17,9 +14,9 @@ open class FlowController : FlowOperations {
     lateinit var flowCreateConverter: FlowCreateConverter
 
     @Inject
-    lateinit var incomeGetConverter: IncomeGetConverter
+    lateinit var flowGetConverter: FlowGetConverter
 
     override fun addFlow(flow: FlowCreate): FlowGet {
-        return incomeGetConverter.convert(incomeService.addIncome(flowCreateConverter.convert(flow)))
+        return flowGetConverter.convert(incomeService.addIncome(flowCreateConverter.convert(flow)))
     }
 }

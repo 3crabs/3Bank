@@ -1,6 +1,8 @@
 package ru.crabs.income
 
+import ru.crabs.flow.FlowEntity
+
 interface IncomeService {
 
-    fun addIncome(incomeEntity: IncomeEntity): IncomeEntity
+    fun addIncome(flowEntity: FlowEntity): FlowEntity
 }

@@ -1,9 +1,7 @@
 package ru.crabs.outcome
 
 import io.micronaut.http.annotation.Controller
-import ru.crabs.flow.FlowCreate
-import ru.crabs.flow.FlowGet
-import ru.crabs.flow.FlowOperations
+import ru.crabs.flow.*
 import javax.inject.Inject
 
 @Controller("/outcomes")
@@ -13,12 +11,12 @@ open class OutcomeController : FlowOperations {
     lateinit var outcomeService: OutcomeService
 
     @Inject
-    lateinit var outcomeCreateConverter: OutcomeCreateConverter
+    lateinit var flowCreateConverter: FlowCreateConverter
 
     @Inject
-    lateinit var outcomeGetConverter: OutcomeGetConverter
+    lateinit var flowGetConverter: FlowGetConverter
 
     override fun addFlow(flow: FlowCreate): FlowGet {
-        return outcomeGetConverter.convert(outcomeService.addOutcome(outcomeCreateConverter.convert(flow)))
+        return flowGetConverter.convert(outcomeService.addOutcome(flowCreateConverter.convert(flow)))
     }
 }
