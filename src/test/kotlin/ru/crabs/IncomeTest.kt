@@ -109,5 +109,19 @@ class IncomeTest : StringSpec(), TestListener {
 
             r.status shouldBe HttpStatus.CREATED
         }
+
+        "test add income with category check base" {
+            val category = categoryClient.addCategory(CategoryCreate("name"))
+            val income = FlowCreate(100, Date(), category.id)
+
+            val newIncome = client.addFlow(income)
+
+            val i = flowRepository.findOneById(newIncome.id)
+            i.shouldNotBeNull()
+            i.amount shouldBe 100
+            dateFormat.format(i.created) shouldBe dateFormat.format(Date())
+            i.type shouldBe "income"
+            i.categoryId shouldBe category.id
+        }
     }
 }

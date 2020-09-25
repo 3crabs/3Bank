@@ -15,6 +15,6 @@ class FlowCreateConverter {
         if (o.categoryId != null && !categoryRepository.existsById(o.categoryId)) {
             throw CategoryNotFoundException()
         }
-        return FlowEntity(0, o.amount, o.created, type, null)
+        return FlowEntity(0, o.amount, o.created, type, o.categoryId)
     }
 }

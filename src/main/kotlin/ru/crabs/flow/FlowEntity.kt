@@ -18,9 +18,8 @@ data class FlowEntity(
 
         var type: String,
 
-        @ManyToOne
-        @JoinColumn(name = "category_id")
-        val category: CategoryEntity?
+        @Column(name = "category_id")
+        var categoryId: Long?
 ) {
     constructor() : this(0, 0, Date(), "", null)
 }
