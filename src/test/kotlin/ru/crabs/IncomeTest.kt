@@ -99,5 +99,21 @@ class IncomeTest : BaseTest() {
             i.type shouldBe "income"
             i.categoryId shouldBe category.id
         }
+
+        "test get empty all incomes" {
+            incomeClient.getAll().size shouldBe 0
+        }
+
+        "test get empty all incomes (OK)" {
+            val r: HttpResponse<List<FlowGet>> = httpClient.toBlocking().exchange("/")
+            r.status shouldBe HttpStatus.OK
+        }
+
+        "test get two incomes" {
+            val income = FlowCreate(100, Date())
+            incomeClient.addFlow(income)
+            incomeClient.addFlow(income)
+            incomeClient.getAll().size shouldBe 2
+        }
     }
 }

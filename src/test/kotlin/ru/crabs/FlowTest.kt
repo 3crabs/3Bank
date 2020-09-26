@@ -25,7 +25,6 @@ class FlowTest : BaseTest() {
 
         "test get empty flows (OK)" {
             val r: HttpResponse<List<FlowGet>> = httpClient.toBlocking().exchange("/")
-
             r.status shouldBe HttpStatus.OK
         }
 

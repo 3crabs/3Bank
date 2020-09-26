@@ -16,4 +16,8 @@ class FlowSingleton : FlowService {
     override fun getAll(): List<FlowEntity> {
         return flowRepository.findAll().toList()
     }
+
+    override fun getAllByType(type: String): List<FlowEntity> {
+        return flowRepository.findAllByType(type)
+    }
 }
