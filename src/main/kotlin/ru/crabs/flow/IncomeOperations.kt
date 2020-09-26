@@ -2,6 +2,7 @@ package ru.crabs.flow
 
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Body
+import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Status
 import io.swagger.v3.oas.annotations.Operation
@@ -15,4 +16,8 @@ interface IncomeOperations {
     @Status(HttpStatus.CREATED)
     @Operation(summary = "Добавление дохода")
     fun addFlow(@Body @Valid flow: FlowCreate): FlowGet
+
+    @Get
+    @Operation(summary = "Получение всех операций доходов")
+    fun getAll(): List<FlowGet>
 }

@@ -4,7 +4,7 @@ import io.micronaut.http.annotation.Controller
 import javax.inject.Inject
 
 @Controller("/outcomes")
-open class OutcomeController : OutcomeOperations, FlowOperations {
+open class OutcomeController : OutcomeOperations {
 
     @Inject
     lateinit var flowService: FlowService
