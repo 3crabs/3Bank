@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.info.Info
 @OpenAPIDefinition(
         info = Info(
                 title = "PiggyBank",
-                version = "0.2",
+                version = "1.8",
                 description = "API для приложения piggy bank"
         )
 )
