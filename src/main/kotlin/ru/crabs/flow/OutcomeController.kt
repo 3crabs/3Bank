@@ -1,11 +1,10 @@
 package ru.crabs.flow
 
 import io.micronaut.http.annotation.Controller
-import ru.crabs.flow.*
 import javax.inject.Inject
 
 @Controller("/outcomes")
-open class OutcomeController : FlowOperations {
+open class OutcomeController : OutcomeOperations {
 
     @Inject
     lateinit var flowService: FlowService
