@@ -15,8 +15,10 @@ import ru.crabs.clients.CategoryClient
 import ru.crabs.clients.FlowClient
 import ru.crabs.clients.IncomeClient
 import ru.crabs.clients.OutcomeClient
+import ru.crabs.flow.FlowCreate
 import ru.crabs.flow.FlowGet
 import ru.crabs.flow.FlowRepository
+import java.util.*
 import javax.inject.Inject
 
 @MicronautTest
@@ -63,6 +65,12 @@ class FlowTest : StringSpec(), TestListener {
             val r: HttpResponse<List<FlowGet>> = httpClient.toBlocking().exchange("/")
 
             r.status shouldBe HttpStatus.OK
+        }
+
+        "test get two flows" {
+            incomeClient.addFlow(FlowCreate(100, Date()))
+            outcomeClient.addFlow(FlowCreate(100, Date()))
+            flowClient.getAll().size shouldBe 2
         }
     }
 }
