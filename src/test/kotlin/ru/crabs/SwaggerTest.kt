@@ -1,7 +1,6 @@
 package ru.crabs
 
 import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient
@@ -10,7 +9,7 @@ import io.micronaut.test.annotation.MicronautTest
 import javax.inject.Inject
 
 @MicronautTest
-class SwaggerTest : StringSpec() {
+class SwaggerTest : BaseTest() {
 
     @Inject
     @field:Client("/")

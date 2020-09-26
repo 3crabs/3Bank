@@ -1,13 +1,9 @@
 package ru.crabs
 
-import io.kotlintest.TestCase
-import io.kotlintest.TestResult
-import io.kotlintest.extensions.TestListener
 import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.types.shouldNotBeNull
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldThrow
-import io.kotlintest.specs.StringSpec
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -17,36 +13,20 @@ import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.test.annotation.MicronautTest
 import ru.crabs.category.CategoryCreate
 import ru.crabs.category.CategoryGet
-import ru.crabs.category.CategoryRepository
-import ru.crabs.clients.CategoryClient
 import javax.inject.Inject
 
 @MicronautTest
-class CategoryTest : StringSpec(), TestListener {
+class CategoryTest : BaseTest() {
 
     @Inject
     @field:Client("/categories")
     lateinit var httpClient: HttpClient
 
-    @Inject
-    lateinit var client: CategoryClient
-
-    @Inject
-    lateinit var categoryRepository: CategoryRepository
-
-    override fun beforeTest(testCase: TestCase) {
-        categoryRepository.deleteAll()
-    }
-
-    override fun afterTest(testCase: TestCase, result: TestResult) {
-        categoryRepository.deleteAll()
-    }
-
     init {
         "test add category" {
             val category = CategoryCreate("name")
 
-            val newCategory = client.addCategory(category)
+            val newCategory = categoryClient.addCategory(category)
 
             newCategory.shouldNotBeNull()
             newCategory.id.shouldNotBeNull()
@@ -71,7 +51,7 @@ class CategoryTest : StringSpec(), TestListener {
         }
 
         "test get all categories" {
-            val categories = client.getCategories()
+            val categories = categoryClient.getCategories()
 
             categories.size shouldBe 0
         }
@@ -79,8 +59,8 @@ class CategoryTest : StringSpec(), TestListener {
         "test get list categories with one item" {
             val category = CategoryCreate("name")
 
-            client.addCategory(category)
-            val categories = client.getCategories()
+            categoryClient.addCategory(category)
+            val categories = categoryClient.getCategories()
 
             categories.size shouldBe 1
         }
@@ -93,31 +73,31 @@ class CategoryTest : StringSpec(), TestListener {
         }
 
         "test delete category" {
-            client.getCategories().size shouldBe 0
+            categoryClient.getCategories().size shouldBe 0
 
             val category = CategoryCreate("name")
-            val newCategory = client.addCategory(category)
+            val newCategory = categoryClient.addCategory(category)
 
-            client.getCategories().size shouldBe 1
+            categoryClient.getCategories().size shouldBe 1
 
-            val deleteCategory = client.deleteCategory(newCategory.id)
+            val deleteCategory = categoryClient.deleteCategory(newCategory.id)
 
             deleteCategory.shouldNotBeNull()
             deleteCategory.name shouldBe "name"
-            client.getCategories().size shouldBe 0
+            categoryClient.getCategories().size shouldBe 0
         }
 
         "test add child category" {
             val category = CategoryCreate("name 1")
-            val newCategory = client.addCategory(category)
+            val newCategory = categoryClient.addCategory(category)
             val childCategory = CategoryCreate("name 2")
 
-            val c = client.addChildCategory(newCategory.id, childCategory)
+            val c = categoryClient.addChildCategory(newCategory.id, childCategory)
 
             c.shouldNotBeNull()
             c.name shouldBe "name 2"
 
-            val categories = client.getCategories()
+            val categories = categoryClient.getCategories()
             categories.size shouldBe 1
             categories[0].name shouldBe "name 1"
             categories[0].categories?.get(0)!!.name shouldBe "name 2"
@@ -125,20 +105,20 @@ class CategoryTest : StringSpec(), TestListener {
 
         "test delete category with children" {
             val category = CategoryCreate("name 1")
-            val newCategory = client.addCategory(category)
+            val newCategory = categoryClient.addCategory(category)
             val childCategory = CategoryCreate("name 2")
-            client.addChildCategory(newCategory.id, childCategory)
+            categoryClient.addChildCategory(newCategory.id, childCategory)
 
-            client.deleteCategory(newCategory.id)
+            categoryClient.deleteCategory(newCategory.id)
 
             categoryRepository.findAll().toList().size shouldBe 0
         }
 
         "test update category" {
-            val newCategory = client.addCategory(CategoryCreate("name 1"))
-            client.getCategories()[0].name shouldBe "name 1"
+            val newCategory = categoryClient.addCategory(CategoryCreate("name 1"))
+            categoryClient.getCategories()[0].name shouldBe "name 1"
 
-            val updateCategory = client.updateCategory(newCategory.id, CategoryCreate("name 2"))
+            val updateCategory = categoryClient.updateCategory(newCategory.id, CategoryCreate("name 2"))
             updateCategory.shouldNotBeNull()
             updateCategory.id shouldBe newCategory.id
             updateCategory.name shouldBe "name 2"
@@ -153,7 +133,7 @@ class CategoryTest : StringSpec(), TestListener {
 
         "test add two categories with one name" {
             val category = CategoryCreate("name")
-            client.addCategory(category)
+            categoryClient.addCategory(category)
 
             val e: HttpClientResponseException = shouldThrow { httpClient.toBlocking().retrieve(HttpRequest.POST("/", category)) }
 
