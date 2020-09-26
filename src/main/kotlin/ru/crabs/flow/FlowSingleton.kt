@@ -12,4 +12,8 @@ class FlowSingleton : FlowService {
     override fun addFlow(flowEntity: FlowEntity): FlowEntity {
         return flowRepository.save(flowEntity)
     }
+
+    override fun getAll(): List<FlowEntity> {
+        return flowRepository.findAll().toList()
+    }
 }
