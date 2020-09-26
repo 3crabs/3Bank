@@ -4,7 +4,7 @@ import io.micronaut.http.annotation.Controller
 import javax.inject.Inject
 
 @Controller("/outcomes")
-open class OutcomeController : OutcomeOperations {
+open class OutcomeController : OutcomeOperations, FlowOperations {
 
     @Inject
     lateinit var flowService: FlowService
@@ -17,5 +17,9 @@ open class OutcomeController : OutcomeOperations {
 
     override fun addFlow(flow: FlowCreate): FlowGet {
         return flowGetConverter.convert(flowService.addFlow(flowCreateConverter.convert(flow, "outcome")))
+    }
+
+    override fun getAll(): List<FlowGet> {
+        return flowService.getAllByType("outcome").map { flowGetConverter.convert(it) }
     }
 }

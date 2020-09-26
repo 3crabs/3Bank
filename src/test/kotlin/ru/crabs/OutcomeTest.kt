@@ -102,5 +102,21 @@ class OutcomeTest : BaseTest() {
             i.type shouldBe "outcome"
             i.categoryId shouldBe category.id
         }
+
+        "test get empty all outcomes" {
+            outcomeClient.getAll().size shouldBe 0
+        }
+
+        "test get empty all outcomes (OK)" {
+            val r: HttpResponse<List<FlowGet>> = httpClient.toBlocking().exchange("/")
+            r.status shouldBe HttpStatus.OK
+        }
+
+        "test get two outcomes" {
+            val income = FlowCreate(100, Date())
+            outcomeClient.addFlow(income)
+            outcomeClient.addFlow(income)
+            outcomeClient.getAll().size shouldBe 2
+        }
     }
 }
