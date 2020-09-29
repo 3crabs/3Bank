@@ -5,4 +5,4 @@ import ru.crabs.flow.FlowOperations
 import ru.crabs.flow.IncomeOperations
 
 @Client("/incomes")
-interface IncomeClient : IncomeOperations, FlowOperations
+interface IncomeClient : IncomeOperations

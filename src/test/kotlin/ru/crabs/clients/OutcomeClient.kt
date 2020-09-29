@@ -5,4 +5,4 @@ import ru.crabs.flow.FlowOperations
 import ru.crabs.flow.OutcomeOperations
 
 @Client("/outcomes")
-interface OutcomeClient : OutcomeOperations, FlowOperations
+interface OutcomeClient : OutcomeOperations
