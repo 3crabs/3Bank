@@ -19,10 +19,10 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${BASE_URL}
     driverClassName: org.postgresql.Driver
     username: postgres
-    password: piggy
+    password: ${POSTGRES_PASSWORD}
     dialect: POSTGRES
 
 jpa:

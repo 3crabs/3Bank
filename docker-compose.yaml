@@ -16,7 +16,10 @@ services:
 
   piggy:
     container_name: piggy
-    image: vo13crabs/piggy:1.5
+    image: vo13crabs/piggy:1.9
+    environment:
+      BASE_URL: jdbc:postgresql://piggy_base:5432/postgres
+      POSTGRES_PASSWORD: piggy
     networks:
       - piggy_network
     ports:
