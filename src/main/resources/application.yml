@@ -2,6 +2,13 @@ micronaut:
   application:
     name: free_bank
 
+  server:
+    netty:
+      access-logger:
+        enabled: true
+        logger-name: http-logger
+        log-format: common
+
   router:
     static-resources:
       swagger:

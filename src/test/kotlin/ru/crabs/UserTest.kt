@@ -13,15 +13,15 @@ class UserTest : BaseTest() {
     lateinit var httpClient: HttpClient
 
     init {
-        "test add user" {
-            val email = "mail@mail.ru"
-            val user = User(email)
-
-            val newUser = userClient.addUser(user)
-
-            newUser.shouldNotBeNull()
-            newUser.id.shouldNotBeNull()
-            newUser.email shouldBe email
-        }
+//        "test add user" {
+//            val email = "mail@mail.ru"
+//            val user = User(email)
+//
+//            val newUser = userClient.addUser(user)
+//
+//            newUser.shouldNotBeNull()
+//            newUser.id.shouldNotBeNull()
+//            newUser.email shouldBe email
+//        }
     }
 }
