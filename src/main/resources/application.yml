@@ -25,6 +25,19 @@ micronaut:
         mapping: /swagger-ui/**
 
   security:
+    authentication: bearer
+    token:
+      jwt:
+        generator:
+          access-token:
+            expiration: 3600
+          refresh-token:
+            secret: 'piggySecret'
+        signatures:
+          secret:
+            generator:
+              secret: 'piggySecret'
+              jws-algorithm: HS256
     intercept-url-map:
       - pattern: /
         access:

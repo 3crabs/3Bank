@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import javax.inject.Inject
 
 @Controller("/outcomes")
-@SecurityRequirement(name = "basic")
+@SecurityRequirement(name = "Auth")
 @Secured(SecurityRule.IS_AUTHENTICATED)
 open class OutcomeController : OutcomeOperations {
 
