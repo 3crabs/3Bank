@@ -24,6 +24,31 @@ micronaut:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
 
+  security:
+    intercept-url-map:
+      - pattern: /categories/**
+        access:
+          #          - isAuthenticated()
+          - isAnonymous()
+      - pattern: /flows/**
+        access:
+          #          - isAuthenticated()
+          - isAnonymous()
+      - pattern: /incomes/**
+        access:
+          #          - isAuthenticated()
+          - isAnonymous()
+      - pattern: /outcomes/**
+        access:
+          #          - isAuthenticated()
+          - isAnonymous()
+      - pattern: /
+        access:
+          - isAnonymous()
+      - pattern: /swagger-ui/**
+        access:
+          - isAnonymous()
+
 datasources:
   default:
     url: ${BASE_URL}

@@ -7,7 +7,7 @@ import io.micronaut.test.annotation.MicronautTest
 class IndexTest : BaseTest() {
 
     init {
-        "test the server is running" {
+        "test get elvis" {
             indexClient.getIndex() shouldBe "?:)"
         }
     }
