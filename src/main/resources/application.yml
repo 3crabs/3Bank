@@ -26,26 +26,19 @@ micronaut:
 
   security:
     intercept-url-map:
-      - pattern: /categories/**
-        access:
-          #          - isAuthenticated()
-          - isAnonymous()
-      - pattern: /flows/**
-        access:
-          #          - isAuthenticated()
-          - isAnonymous()
-      - pattern: /incomes/**
-        access:
-          #          - isAuthenticated()
-          - isAnonymous()
-      - pattern: /outcomes/**
-        access:
-          #          - isAuthenticated()
-          - isAnonymous()
       - pattern: /
         access:
           - isAnonymous()
       - pattern: /swagger-ui/**
+        access:
+          - isAnonymous()
+      - pattern: /swagger/**
+        access:
+          - isAnonymous()
+      - pattern: /redoc/**
+        access:
+          - isAnonymous()
+      - pattern: /rapidoc/**
         access:
           - isAnonymous()
 

@@ -16,7 +16,10 @@ services:
 
   piggy:
     container_name: piggy
-    image: vo13crabs/piggy:1.9.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: java -Dcom.sun.management.jmxremote -Xmx128m -jar free_bank.jar
     environment:
       BASE_URL: jdbc:postgresql://piggy_base:5432/postgres
       POSTGRES_PASSWORD: piggy

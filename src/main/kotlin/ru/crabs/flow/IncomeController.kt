@@ -1,9 +1,14 @@
 package ru.crabs.flow
 
 import io.micronaut.http.annotation.Controller
+import io.micronaut.security.annotation.Secured
+import io.micronaut.security.rules.SecurityRule
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import javax.inject.Inject
 
 @Controller("/incomes")
+@SecurityRequirement(name = "basic")
+@Secured(SecurityRule.IS_AUTHENTICATED)
 open class IncomeController : IncomeOperations {
 
     @Inject
