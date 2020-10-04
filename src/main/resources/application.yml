@@ -9,6 +9,39 @@ micronaut:
         logger-name: http-logger
         log-format: common
 
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        generator:
+          access-token:
+            expiration: 3600
+          refresh-token:
+            secret: 'pleaseChangeThisSecretForANewOne'
+        signatures:
+          secret:
+            generator:
+              secret: 'pleaseChangeThisSecretForANewOne'
+              jws-algorithm: HS256
+    intercept-url-map:
+      - pattern: /swagger/*
+        http-method: GET
+        access:
+          - isAnonymous()
+      - pattern: /redoc/*
+        http-method: GET
+        access:
+          - isAnonymous()
+      - pattern: /rapidoc/*
+        http-method: GET
+        access:
+          - isAnonymous()
+      - pattern: /swagger-ui/*
+        http-method: GET
+        access:
+          - isAnonymous()
+
+
   router:
     static-resources:
       swagger:
