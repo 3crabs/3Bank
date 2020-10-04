@@ -24,37 +24,6 @@ micronaut:
         paths: classpath:META-INF/swagger/views/swagger-ui
         mapping: /swagger-ui/**
 
-  security:
-    authentication: bearer
-    token:
-      jwt:
-        generator:
-          access-token:
-            expiration: 3600
-          refresh-token:
-            secret: 'piggySecret'
-        signatures:
-          secret:
-            generator:
-              secret: 'piggySecret'
-              jws-algorithm: HS256
-    intercept-url-map:
-      - pattern: /
-        access:
-          - isAnonymous()
-      - pattern: /swagger-ui/**
-        access:
-          - isAnonymous()
-      - pattern: /swagger/**
-        access:
-          - isAnonymous()
-      - pattern: /redoc/**
-        access:
-          - isAnonymous()
-      - pattern: /rapidoc/**
-        access:
-          - isAnonymous()
-
 datasources:
   default:
     url: ${BASE_URL}

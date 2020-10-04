@@ -7,14 +7,9 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Error
 import io.micronaut.http.hateoas.JsonError
 import io.micronaut.http.hateoas.Link
-import io.micronaut.security.annotation.Secured
-import io.micronaut.security.rules.SecurityRule
-import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import javax.inject.Inject
 
 @Controller("/categories")
-@SecurityRequirement(name = "Auth")
-@Secured(SecurityRule.IS_AUTHENTICATED)
 open class CategoryController : CategoryOperations {
 
     @Inject
