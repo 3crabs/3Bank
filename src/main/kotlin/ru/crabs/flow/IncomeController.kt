@@ -1,12 +1,9 @@
 package ru.crabs.flow
 
 import io.micronaut.http.annotation.Controller
-import io.micronaut.security.annotation.Secured
-import io.micronaut.security.rules.SecurityRule
 import javax.inject.Inject
 
 @Controller("/incomes")
-@Secured(SecurityRule.IS_ANONYMOUS)
 open class IncomeController : IncomeOperations {
 
     @Inject

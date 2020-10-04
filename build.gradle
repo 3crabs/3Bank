@@ -55,10 +55,6 @@ dependencies {
 
     // flyway
     implementation("io.micronaut.flyway:micronaut-flyway")
-
-    // security
-    annotationProcessor("io.micronaut.security:micronaut-security-annotations")
-    implementation("io.micronaut.security:micronaut-security-jwt")
 }
 
 test.classpath += configurations.developmentOnly

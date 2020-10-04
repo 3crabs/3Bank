@@ -7,12 +7,9 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Error
 import io.micronaut.http.hateoas.JsonError
 import io.micronaut.http.hateoas.Link
-import io.micronaut.security.annotation.Secured
-import io.micronaut.security.rules.SecurityRule
 import javax.inject.Inject
 
 @Controller("/categories")
-@Secured(SecurityRule.IS_ANONYMOUS)
 open class CategoryController : CategoryOperations {
 
     @Inject
